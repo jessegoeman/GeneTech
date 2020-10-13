@@ -1,1 +1,3 @@
-aatcagctaatcagctaatcagctaatcagctaatcagctaatcagct
+CCTACGTCGCGATCCACTGA-AAGCTT-TAAGCA
+#copy over the chain without 5- or -3
+#example: CCTACGTCGCGATCCACTGA-AAGCTT-TAAGCA

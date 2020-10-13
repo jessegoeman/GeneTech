@@ -3,9 +3,23 @@ with open("ChainInput.txt","r+") as r:
 
 dictNuc = {"A":"T","T":"A","G":"C","C":"G"}
 sequenceNew = ""
-for char in sequence:
-    sequenceNew+=dictNuc[char.upper()]
+
+seq = "".join(dictNuc.get(char.upper(),char) for char in sequence)
+
+temp = 0
+primer_parts = seq.split("-")
+if len(primer_parts[0])>len(primer_parts[1]):
+    total_temp = sum([temp+4 if codon in "GC" else 2 for codon in primer_parts[0]])
+else:
+    total_temp = sum([temp + 4 if codon in "GC" else 2 for codon in primer_parts[2]])
+
 
 startsign,stopsign = "5'","3'"
+oplossing = f'{stopsign}-{seq}-{startsign}'
+
+print('-'*10)
 print(f'{startsign}-{sequence.upper()}-{stopsign}')
-print(f'{stopsign}-{sequenceNew.upper()}-{startsign}')
+print(oplossing)
+print('-'*10)
+print("FORWARD PRIMER: " +oplossing + " temp: "+str(total_temp))
+print("REVERSE PRIMER: "+ oplossing[::-1] + " temp: "+str(total_temp))
